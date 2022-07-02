@@ -13,8 +13,7 @@ export function Description(props){
   
   return(
     <div>
-      <p className={"description"}>このページはTechtrainにて使用した学習用教材の出力です.</p>
-      <p className={"description"}>更新を押すとランダムな犬の画像が表示されます.</p>
+      <p className={"description"}>更新を押すと下画像が更新され、ランダムな犬の画像が表示されます.</p>
       <DogImage url={dogUrl} />
       <p></p>
       <button onClick={() => getUrl()}>更新</button>

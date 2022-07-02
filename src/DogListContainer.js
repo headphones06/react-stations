@@ -5,6 +5,7 @@ import {BreedsSelect} from './BreedsSelect'
 export function DogListContainer(props){
   const [breeds, setBreeds] = useState([]);
   const [selectedBreed, setSelectedBreed] = useState("");
+  const [dogList, setDogList] = useState([]);
   const handleChange = e => setSelectedBreed(e.target.value)
 
   useEffect(() => {
@@ -18,7 +19,28 @@ export function DogListContainer(props){
     });
   },[])
   
+  function getAPI(type){
+    fetch("https://dog.ceo/api/breed/" + type + "/images/random/12")
+    .then(res => res.json())
+    .then(data => {setDogList(data.message)}
+    );
+    console.log(dogList)
+  }
+
+  const breedImges = dogList.map((image) => {
+    return(
+      <div className='dogImage' key={image}>
+        <img src={image} key={image} />
+      </div>
+    )
+  })
+
   return(
-    <BreedsSelect breeds = {breeds} value = {selectedBreed} change = {handleChange} />
+    <dev>
+      <BreedsSelect breeds = {breeds} value = {selectedBreed} change = {handleChange} />
+      <button onClick={() => getAPI(selectedBreed)}>表示</button>
+      <br />
+      {breedImges}
+    </dev>
   )
 }
