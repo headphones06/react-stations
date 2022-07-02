@@ -9,9 +9,11 @@ export function BreedsSelect(props){
       <option>select</option>
       {
         breedArray.map((val) => {
-          <option key = {val} value = {val}>
-            {val}
-          </option>
+          return(
+            <option key = {val} value = {val}>
+              {val}
+            </option>
+          )
         })
       }
     </select>
