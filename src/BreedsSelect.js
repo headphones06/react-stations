@@ -6,7 +6,6 @@ export function BreedsSelect(props){
 
   return (
     <select onChange = {props.change} value={props.value}>
-      <option>select</option>
       {
         breedArray.map((val) => {
           return(

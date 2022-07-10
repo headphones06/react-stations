@@ -1,12 +1,12 @@
 // DO NOT DELETE
 import React, {useState, useEffect} from 'react';
-import {BreedsSelect} from './BreedsSelect'
+import {BreedsSelect} from './BreedsSelect.js'
 
 export function DogListContainer(props){
   const [breeds, setBreeds] = useState([]);
-  const [selectedBreed, setSelectedBreed] = useState("");
+  const [selectedBreed, setSelectedBreed] = useState("hound");
   const [dogList, setDogList] = useState([]);
-  const handleChange = e => setSelectedBreed(e.target.value)
+  const handleChange = e => setSelectedBreed(e.target.value);
 
   useEffect(() => {
     fetch("https://dog.ceo/api/breeds/list/all")
@@ -22,8 +22,11 @@ export function DogListContainer(props){
   function getAPI(type){
     fetch("https://dog.ceo/api/breed/" + type + "/images/random/12")
     .then(res => res.json())
-    .then(data => {setDogList(data.message)}
-    );
+    .then(data => {
+      if(data.status === 'success'){
+        setDogList(data.message);
+      }
+    })
     console.log(dogList)
   }
 
@@ -37,7 +40,7 @@ export function DogListContainer(props){
 
   return(
     <dev>
-      <BreedsSelect breeds = {breeds} value = {selectedBreed} change = {handleChange} />
+      <BreedsSelect breeds = {breeds} value = {selectedBreed} change = {handleChange}/>
       <button onClick={() => getAPI(selectedBreed)}>表示</button>
       <br />
       {breedImges}
